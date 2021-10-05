@@ -12,6 +12,7 @@ bind {{ redis_sentinel_bind }}
 {% if redis_sentinel_password %}
 requirepass {{ redis_sentinel_password }}
 {% endif %}
+sentinel resolve-hostnames yes
 
 {% for master in redis_sentinel_monitors -%}
 sentinel monitor {{ master.name }} {{ master.host }} {{ master.port }} {{ master.quorum|d('2') }}
